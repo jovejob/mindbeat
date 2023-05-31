@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 
+// todo Basic Auth in progress
 export const useUserStore = defineStore('user', {
   state: () => ({
     name: 'Eduardo',
@@ -9,7 +10,7 @@ export const useUserStore = defineStore('user', {
     /**
      * Attempt to login a user
      */
-    async login(user: string, password: string) {
+    async login(user, password) {
       const userData = await apiLogin(user, password)
 
       this.$patch({
@@ -31,7 +32,7 @@ export const useUserStore = defineStore('user', {
 /**
  * Simulate a login
  */
-function apiLogin(a: string, p: string) {
+function apiLogin(a, p) {
   if (a === 'ed' && p === 'ed') return Promise.resolve({ isAdmin: true })
   if (p === 'ed') return Promise.resolve({ isAdmin: false })
   return Promise.reject(new Error('invalid credentials'))
